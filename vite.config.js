@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/portfolio-profile/', // <-- Add this
+  base: process.env.VERCEL ? '/' : './',
 
   plugins: [
     react(),
