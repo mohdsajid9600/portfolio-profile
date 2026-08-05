@@ -535,21 +535,21 @@ html.light {
   --bg-tertiary: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
-  
+
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #64748b;
 
   --glass-border: #e2e8f0;
-  --glass-border-hover: #3b82f6;
+  --glass-border-hover: #cbd5e1;
   --divider-color: #eef2f7;
 
-  --gradient-brand: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+  --gradient-brand: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   --gradient-text: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-  --gradient-accent-text: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
-  
-  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.02), 0 10px 30px -4px rgba(15, 23, 42, 0.05);
-  --shadow-glow: 0 20px 40px -10px rgba(37, 99, 235, 0.14);
+  --gradient-accent-text: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.03), 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+  --shadow-glow: 0 20px 40px -10px rgba(15, 23, 42, 0.12);
 
   --accent-blue: #2563eb;
   --accent-purple: #7c3aed;
@@ -570,15 +570,63 @@ html.light .section-container {
   padding-bottom: 96px !important;
 }
 
-/* Unified Continuous Background in Light Mode (No harsh page-type block boxes) */
-html.light section {
-  background-color: transparent !important;
-  border: none !important;
+/* Layered Neutral Backgrounds across Sections */
+html.light #hero {
+  background-color: #f5f7fb !important;
+}
+
+html.light #about {
+  background-color: #ffffff !important;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+html.light #techstack {
+  background-color: #f8fafc !important;
+}
+
+html.light #experience {
+  background-color: #ffffff !important;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+html.light #education {
+  background-color: #f5f7fb !important;
+}
+
+html.light #projects {
+  background-color: #ffffff !important;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+html.light #services {
+  background-color: #f8fafc !important;
+}
+
+html.light #certifications {
+  background-color: #ffffff !important;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+html.light #skills {
+  background-color: #f5f7fb !important;
+}
+
+html.light #testimonials {
+  background-color: #ffffff !important;
+  border-top: 1px solid #eef2f7;
+  border-bottom: 1px solid #eef2f7;
+}
+
+html.light #contact {
+  background-color: #f8fafc !important;
 }
 
 html.light footer {
-  background-color: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(12px) !important;
+  background-color: #ffffff !important;
   border-top: 1px solid #e2e8f0 !important;
 }
 
@@ -613,18 +661,11 @@ html.light .bg-grid-pattern {
     linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px) !important;
 }
 
-/* Hero Background Glows */
-html.light .bg-indigo-600\/12,
-html.light .bg-purple-600\/10 {
-  background-color: rgba(37, 99, 235, 0.06) !important;
-}
-
 /* Section Tag Pill */
 html.light .section-tag {
   background-color: #eff6ff !important;
   border-color: #bfdbfe !important;
   color: #2563eb !important;
-  font-weight: 600 !important;
 }
 
 /* Typography Hierarchy in Light Mode */
@@ -662,15 +703,14 @@ html.light .glass-panel {
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 20px !important;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 10px 30px -4px rgba(15, 23, 42, 0.05) !important;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 10px 30px -5px rgba(15, 23, 42, 0.06) !important;
 }
 
 html.light .glass-card:hover {
   background: #ffffff !important;
-  border-color: #3b82f6 !important;
+  border-color: #cbd5e1 !important;
   transform: translateY(-4px) !important;
-  box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.14), 0 0 20px rgba(59, 130, 246, 0.08) !important;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12) !important;
 }
 
 /* Sub-containers, Chips & Tables */
@@ -696,25 +736,6 @@ html.light .bg-slate-900\/80 {
   background-color: #f1f5f9 !important;
 }
 
-/* Status Badges in Light Mode */
-html.light .bg-indigo-500\/10 {
-  background-color: #eff6ff !important;
-  color: #2563eb !important;
-  border-color: #bfdbfe !important;
-}
-
-html.light .bg-emerald-500\/10 {
-  background-color: #f0fdf4 !important;
-  color: #16a34a !important;
-  border-color: #bbf7d0 !important;
-}
-
-html.light .bg-amber-500\/10 {
-  background-color: #fffbeb !important;
-  color: #d97706 !important;
-  border-color: #fde68a !important;
-}
-
 /* Borders in Light Mode */
 html.light .border-slate-800,
 html.light .border-slate-800\/90,
@@ -729,17 +750,16 @@ html.light .border-slate-700\/50 {
 
 /* Buttons in Light Mode */
 html.light .btn-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%) !important;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%) !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3) !important;
   border: none !important;
   border-radius: 12px !important;
-  font-weight: 600 !important;
 }
 
 html.light .btn-primary:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45) !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4) !important;
 }
 
 html.light .btn-secondary {
@@ -748,7 +768,6 @@ html.light .btn-secondary {
   color: #0f172a !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
   border-radius: 12px !important;
-  font-weight: 600 !important;
 }
 
 html.light .btn-secondary:hover {
