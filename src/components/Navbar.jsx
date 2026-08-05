@@ -40,14 +40,13 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[9000] transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-[9000] transition-all duration-300 ${scrolled
           ? 'bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/80 shadow-lg py-3'
           : 'bg-slate-950/40 backdrop-blur-md border-b border-slate-800/30 py-4'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        
+
         {/* Column 1: Brand Logo (Left Aligned) */}
         <div className="flex-1 flex items-center justify-start">
           <a href="#hero" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xl p-1">
@@ -75,11 +74,10 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
               <a
                 key={link.name}
                 href={link.href}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-indigo-500 ${
-                  isActive
+                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-indigo-500 ${isActive
                     ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-bold'
                     : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
-                }`}
+                  }`}
               >
                 {link.name}
               </a>
@@ -183,11 +181,10 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                          isActive
+                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${isActive
                             ? 'bg-indigo-600/90 text-white font-bold shadow-lg shadow-indigo-600/20 border border-indigo-500/40'
                             : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
-                        }`}
+                          }`}
                       >
                         <span>{link.name}</span>
                         {isActive && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400" />}

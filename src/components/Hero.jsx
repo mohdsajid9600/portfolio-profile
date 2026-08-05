@@ -76,7 +76,7 @@ export default function Hero({ onOpenResume }) {
             </div>
 
             {/* Subtitle summary */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-[1.7]">
               Engineered for high-throughput enterprise systems. Expert in <span className="text-white font-semibold">Core Java (JDK 8-17)</span>, <span className="text-white font-semibold">Spring Boot</span>, <span className="text-white font-semibold">Spring Security</span>, and <span className="text-emerald-400 font-semibold">AI-Augmented Developer Workflows</span>. 400+ LeetCode problems solved.
             </p>
 

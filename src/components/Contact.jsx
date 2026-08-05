@@ -74,7 +74,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section-container">
-      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+      {/* Section Header */}
+      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
         <span className="section-tag">
           <FiMail className="w-3.5 h-3.5" /> Get In Touch
         </span>
@@ -96,8 +97,8 @@ export default function Contact() {
           className="lg:col-span-5 flex flex-col gap-6 text-left justify-between"
         >
           {/* Quick Contact Cards */}
-          <div className="glass-card p-5 sm:p-6 lg:p-8 flex flex-col gap-6">
-            <h3 className="text-xl font-bold text-white tracking-wide">Direct Reach</h3>
+          <div className="glass-card p-6 sm:p-7 lg:p-8 flex flex-col gap-6 border border-slate-800/80">
+            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">Direct Reach</h3>
 
             <div className="flex flex-col gap-4">
               {/* Email Card */}
@@ -163,7 +164,7 @@ export default function Contact() {
           </div>
 
           {/* Location Map Placeholder Card */}
-          <div className="glass-card p-5 sm:p-6 flex flex-col gap-4">
+          <div className="glass-card p-6 sm:p-7 flex flex-col gap-4 border border-slate-800/80">
             <div className="h-52 rounded-xl bg-slate-950/90 relative overflow-hidden border border-slate-800/80 flex flex-col items-center justify-center p-6 text-center">
               <div className="absolute inset-0 bg-grid-pattern opacity-30" />
               <div className="relative z-10 flex flex-col items-center gap-2 max-w-xs">
@@ -185,10 +186,10 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="lg:col-span-7 flex flex-col gap-6 text-left h-full"
         >
-          <div className="glass-card p-5 sm:p-6 lg:p-8 flex flex-col gap-6 h-full justify-between">
-            <div className="flex flex-col gap-4">
+          <div className="glass-card p-6 sm:p-8 lg:p-10 flex flex-col gap-6 h-full justify-between border border-slate-800/80">
+            <div className="flex flex-col gap-3">
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">Send a Message</h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-400 leading-[1.75]">
                 Fill out the form below to initiate contact regarding Java backend positions, contract services, or architectural consulting.
               </p>
             </div>
@@ -271,11 +272,11 @@ export default function Contact() {
                 />
               </div>
 
-              <div className="mt-6">
+              <div className="mt-4 sm:mt-6">
                 <button
                   type="submit"
                   disabled={status.loading}
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
+                  className="btn btn-lg btn-primary w-full justify-center text-xs font-semibold py-3 uppercase tracking-wider"
                 >
                   <FiSend className={`w-4 h-4 ${status.loading ? 'animate-bounce' : ''}`} />
                   <span>{status.loading ? 'Sending Message...' : 'Send Message'}</span>

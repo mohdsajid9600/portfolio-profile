@@ -96,7 +96,7 @@ export default function TechStack() {
                       <span className="text-xs font-mono font-bold text-indigo-400 shrink-0">{skill.level}%</span>
                     </div>
                     <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{skill.highlight}</p>
-                    
+
                     {/* Animated Skill Level Bar */}
                     <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800 mt-1">
                       <motion.div

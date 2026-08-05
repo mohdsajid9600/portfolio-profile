@@ -38,8 +38,8 @@ export default function Projects({ onSelectProject }) {
               key={cat}
               onClick={() => setFilter(cat)}
               className={`relative px-4 sm:px-5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer ${isActive
-                  ? 'text-white bg-indigo-600/90 shadow-lg shadow-indigo-600/30 border border-indigo-500/50'
-                  : 'text-slate-400 hover:text-slate-200 bg-slate-900/60 border border-slate-800/80 hover:bg-slate-800/60'
+                ? 'text-white bg-indigo-600/90 shadow-lg shadow-indigo-600/30 border border-indigo-500/50'
+                : 'text-slate-400 hover:text-slate-200 bg-slate-900/60 border border-slate-800/80 hover:bg-slate-800/60'
                 }`}
             >
               <span>{cat === 'all' ? 'All Projects' : cat}</span>
