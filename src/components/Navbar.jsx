@@ -45,7 +45,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
           : 'bg-slate-950/40 backdrop-blur-md border-b border-slate-800/30 py-4'
         }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <div className="w-full px-4 sm:px-8 lg:px-12 flex items-center justify-between">
 
         {/* Column 1: Brand Logo (Left Aligned) */}
         <div className="flex-1 flex items-center justify-start">

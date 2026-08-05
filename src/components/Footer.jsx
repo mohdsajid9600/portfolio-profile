@@ -27,8 +27,8 @@ export default function Footer({ onOpenResume }) {
   };
 
   return (
-    <footer className="relative bg-slate-950 border-t border-slate-800/80 text-slate-400 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 z-10">
-      <div className="max-w-7xl mx-auto flex flex-col gap-8 lg:gap-10">
+    <footer className="relative bg-slate-950 border-t border-slate-800/80 text-slate-400 py-12 sm:py-16 px-4 sm:px-8 lg:px-12 z-10 w-full">
+      <div className="w-full flex flex-col gap-8 lg:gap-10">
         
         {/* Top Row: Brand & Quick Nav */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-900">
