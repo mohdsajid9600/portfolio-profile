@@ -16,6 +16,7 @@ import {
 } from 'react-icons/fi';
 import { FaGithub, FaLinkedin, FaCode } from 'react-icons/fa';
 import ThemeToggle from './ThemeToggle';
+import navProfileImg from '../assets/nav-profile.png';
 
 export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume }) {
   const [scrolled, setScrolled] = useState(false);
@@ -75,13 +76,15 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
       >
         <div className="w-full px-3 sm:px-6 lg:px-10 flex items-center justify-between gap-2 max-w-7xl mx-auto">
 
-          {/* Column 1: Brand Logo (Adaptive: MS icon on extra small mobile, Name on 380px+, Full Title on sm+) */}
+          {/* Column 1: Brand Logo Avatar (Circular Profile Photo) */}
           <div className="flex items-center justify-start shrink-0 min-w-0">
             <a href="#hero" className="flex items-center gap-2 sm:gap-3 group focus:outline-none rounded-xl p-0.5">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300 shrink-0">
-                <div className="w-full h-full bg-slate-950 light:bg-white rounded-[10.5px] flex items-center justify-center font-bold text-white light:text-slate-900 text-sm sm:text-base font-mono">
-                  MS
-                </div>
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300 shrink-0 overflow-hidden">
+                <img
+                  src={navProfileImg}
+                  alt="Mohd Sajid Profile Avatar"
+                  className="w-full h-full object-cover object-center rounded-full"
+                />
               </div>
               <div className="hidden min-[380px]:flex flex-col text-left min-w-0">
                 <span className="font-extrabold text-slate-100 light:text-slate-900 group-hover:text-indigo-400 transition-colors tracking-tight text-sm sm:text-base leading-tight truncate">
@@ -206,13 +209,15 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
               >
                 {/* Vertically Aligned Header & Navigation Links */}
                 <div className="space-y-6">
-                  {/* Top Bar: Brand Logo + Close Button */}
+                  {/* Top Bar: Circular Profile Avatar + Close Button */}
                   <div className="flex items-center justify-between border-b border-slate-800 light:border-slate-200 pb-5">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 shrink-0">
-                        <div className="w-full h-full bg-slate-950 light:bg-white rounded-[10.5px] flex items-center justify-center font-bold text-white light:text-slate-900 text-base font-mono">
-                          MS
-                        </div>
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 shrink-0 overflow-hidden">
+                        <img
+                          src={navProfileImg}
+                          alt="Mohd Sajid Profile Avatar"
+                          className="w-full h-full object-cover object-center rounded-full"
+                        />
                       </div>
                       <div className="flex flex-col">
                         <span className="font-extrabold text-white light:text-slate-900 text-base tracking-tight leading-tight">
