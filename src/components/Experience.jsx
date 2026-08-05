@@ -2,12 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiBriefcase, FiCalendar, FiMapPin, FiCheck } from 'react-icons/fi';
 import { experiences } from '../data/portfolioData';
+import Card from './common/Card';
 
 export default function Experience() {
   return (
     <section id="experience" className="section-container">
       {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 lg:mb-20">
+      <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 lg:mb-20">
         <span className="section-tag">
           <FiBriefcase className="w-3.5 h-3.5" /> Career Journey
         </span>
@@ -20,7 +21,7 @@ export default function Experience() {
       </div>
 
       {/* Experience Cards Container */}
-      <div className="max-w-4xl mx-auto flex flex-col gap-6 sm:gap-8 lg:gap-10 text-left">
+      <div className="max-w-4xl mx-auto flex flex-col gap-10 sm:gap-12 lg:gap-14 text-left">
         {experiences.map((exp, idx) => (
           <motion.div
             key={exp.id}
@@ -28,60 +29,73 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.15 }}
-            className="glass-card p-6 sm:p-8 lg:p-10 flex flex-col gap-6 lg:gap-8 relative border border-slate-800/80 hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300"
           >
-            {/* Top Row: Role & Company */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-5">
-              <div className="flex flex-col gap-1.5">
-                <span className="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 w-fit mb-0.5">
-                  {exp.type}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  {exp.role} <span className="text-indigo-400 font-semibold">@ {exp.company}</span>
-                </h3>
-              </div>
-              <div className="flex items-center gap-4 text-xs font-mono text-slate-400 shrink-0">
-                <span className="flex items-center gap-1.5">
-                  <FiCalendar className="text-indigo-400" /> {exp.period}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <FiMapPin className="text-emerald-400" /> {exp.location}
-                </span>
-              </div>
-            </div>
+            <Card>
+              <div className="flex flex-col gap-6 lg:gap-8">
+                {/* Clean Stacked Header: Top Badge & Date/Location Row + Title */}
+                <div className="flex flex-col gap-3.5 border-b border-slate-800/80 light:border-slate-200 pb-5">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    {/* Role Type Badge */}
+                    <span className="text-[11px] font-mono font-semibold px-3 py-1 rounded-full bg-indigo-500/10 light:bg-indigo-50 text-indigo-300 light:text-indigo-700 border border-indigo-500/30 light:border-indigo-200 shrink-0">
+                      {exp.type}
+                    </span>
 
-            {/* Role Description */}
-            <p className="text-slate-300 text-sm sm:text-base leading-[1.8] sm:leading-[1.85]">
-              {exp.description}
-            </p>
-
-            {/* Impact Highlights */}
-            <div className="flex flex-col gap-3.5">
-              <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
-                Key Accomplishments & Impact Metrics:
-              </h4>
-              <div className="flex flex-col gap-3">
-                {exp.highlights.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3.5 text-xs sm:text-sm text-slate-300 bg-slate-950/60 p-4 lg:p-4.5 rounded-xl border border-slate-800/80 hover:border-slate-700/80 transition-colors">
-                    <FiCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="leading-[1.75]">{item}</span>
+                    {/* Date & Location metadata */}
+                    <div className="flex flex-wrap items-center gap-3 text-xs font-mono text-slate-400 light:text-slate-500">
+                      <span className="flex items-center gap-1.5">
+                        <FiCalendar className="text-indigo-400 light:text-indigo-600" /> {exp.period}
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <FiMapPin className="text-emerald-400 light:text-emerald-600" /> {exp.location}
+                      </span>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Tech Stack Badges */}
-            <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-800/80">
-              {exp.tech.map((t, i) => (
-                <span key={i} className="px-3 py-1.5 rounded-xl bg-slate-900/90 text-indigo-200 text-xs font-mono border border-slate-800/90 hover:border-indigo-500/40 hover:text-white transition-colors">
-                  {t}
-                </span>
-              ))}
-            </div>
+                  {/* Main Role & Company */}
+                  <h3 className="text-xl sm:text-2xl font-bold text-white light:text-slate-900 tracking-tight leading-snug">
+                    {exp.role} <span className="text-indigo-400 light:text-indigo-600 font-semibold">@ {exp.company}</span>
+                  </h3>
+                </div>
+
+                {/* Role Description */}
+                <p className="text-slate-300 light:text-slate-600 text-sm sm:text-base leading-[1.8] sm:leading-[1.85]">
+                  {exp.description}
+                </p>
+
+                {/* Impact Highlights */}
+                <div className="flex flex-col gap-3.5">
+                  <h4 className="text-xs font-mono font-bold text-slate-400 light:text-slate-500 uppercase tracking-wider">
+                    Key Accomplishments & Impact Metrics:
+                  </h4>
+                  <div className="flex flex-col gap-3">
+                    {exp.highlights.map((item, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-3.5 text-xs sm:text-sm text-slate-300 light:text-slate-700 bg-slate-950/60 light:bg-slate-50 p-4 sm:p-4.5 rounded-xl border border-slate-800/80 light:border-slate-200"
+                      >
+                        <FiCheck className="w-4 h-4 text-emerald-400 light:text-emerald-600 shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tech Stack Badges */}
+                <div className="flex flex-wrap gap-2 pt-5 border-t border-slate-800/80 light:border-slate-200">
+                  {exp.tech.map((t, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1.5 rounded-xl bg-slate-900/90 light:bg-slate-100 text-indigo-200 light:text-indigo-700 text-xs font-mono border border-slate-800/90 light:border-slate-200"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Card>
           </motion.div>
         ))}
       </div>
     </section>
   );
 }
-

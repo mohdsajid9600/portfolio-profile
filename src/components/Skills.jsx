@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiAward, FiCheckCircle, FiZap } from 'react-icons/fi';
 import { SiLeetcode } from 'react-icons/si';
+import CardGrid from './common/CardGrid';
+import Card, { CardTitle, CardDescription } from './common/Card';
 
 export default function Skills() {
   const coreCompetencies = [
@@ -56,7 +58,7 @@ export default function Skills() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="glass-card p-6 sm:p-8 lg:p-10 mb-14 lg:mb-16 border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-slate-900 to-indigo-950/40 relative overflow-hidden"
+        className="glass-card p-8 sm:p-9 lg:p-10 mb-14 lg:mb-16 border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-slate-900 to-indigo-950/40 relative overflow-hidden"
       >
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 text-left">
           <div className="flex items-center gap-4">
@@ -88,7 +90,7 @@ export default function Skills() {
       </motion.div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 text-left">
+      <CardGrid cols={2}>
         {coreCompetencies.map((comp, i) => (
           <motion.div
             key={i}
@@ -96,35 +98,39 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="glass-card p-6 sm:p-7 space-y-3.5 flex flex-col justify-between"
+            className="h-full"
           >
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2.5">
-                  <FiCheckCircle className="text-indigo-400 w-4 h-4 shrink-0" />
-                  <span>{comp.title}</span>
-                </h3>
-                <span className="text-xs font-mono font-bold text-emerald-400">{comp.percent}%</span>
+            <Card>
+              <div className="flex flex-col justify-between h-full space-y-6">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <CardTitle className="text-base sm:text-lg flex items-center gap-2.5">
+                      <FiCheckCircle className="text-indigo-400 w-4 h-4 shrink-0" />
+                      <span>{comp.title}</span>
+                    </CardTitle>
+                    <span className="text-xs font-mono font-bold text-emerald-400">{comp.percent}%</span>
+                  </div>
+
+                  <CardDescription>
+                    {comp.desc}
+                  </CardDescription>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800 pt-0.5">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${comp.percent}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
+                    className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full"
+                  />
+                </div>
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                {comp.desc}
-              </p>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="w-full h-2 bg-slate-950 rounded-full overflow-hidden border border-slate-800 pt-1">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: `${comp.percent}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.2, ease: 'easeOut' }}
-                className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full"
-              />
-            </div>
+            </Card>
           </motion.div>
         ))}
-      </div>
+      </CardGrid>
     </section>
   );
 }

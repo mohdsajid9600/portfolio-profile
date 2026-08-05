@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiX, FiGithub, FiExternalLink, FiCheckCircle, FiServer, 
-  FiLayers, FiShield, FiCpu, FiDatabase, FiCode, FiArrowUpRight 
+import {
+  FiX, FiGithub, FiExternalLink, FiCheckCircle, FiServer,
+  FiLayers, FiShield, FiCpu, FiDatabase, FiCode, FiArrowUpRight
 } from 'react-icons/fi';
 
 export default function ProjectModal({ project, onClose }) {
@@ -82,7 +82,7 @@ export default function ProjectModal({ project, onClose }) {
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-[0.9] contrast-[1.05]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-95" />
-            
+
             {/* Title Overlay with Generous Spacing */}
             <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 lg:p-10 space-y-1.5">
               <span className="text-xs text-indigo-400 font-mono font-semibold uppercase tracking-wider block">
@@ -113,8 +113,8 @@ export default function ProjectModal({ project, onClose }) {
               </h3>
               <div className="grid grid-cols-1 gap-3.5 sm:gap-4">
                 {project.keyFeatures.map((feat, i) => (
-                  <div 
-                    key={i} 
+                  <div
+                    key={i}
                     className="flex items-start gap-4 text-xs sm:text-sm text-slate-200 bg-slate-950/70 p-4 sm:p-5 rounded-xl border border-slate-800/80 hover:border-indigo-500/40 transition-all duration-200 min-h-[56px]"
                   >
                     <FiCheckCircle className="w-4.5 h-4.5 text-emerald-400 shrink-0 mt-0.5" />

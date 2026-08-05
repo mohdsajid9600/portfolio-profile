@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiServer, FiDatabase, FiCheck, FiCpu, FiCode } from 'react-icons/fi';
+import { FiServer, FiDatabase, FiCheck, FiCpu } from 'react-icons/fi';
 import { FaBrain, FaLaptopCode } from 'react-icons/fa';
 import { services } from '../data/portfolioData';
+import CardGrid from './common/CardGrid';
+import Card, { CardTitle, CardDescription } from './common/Card';
 
 export default function Services() {
   const iconMap = {
@@ -14,7 +16,7 @@ export default function Services() {
 
   return (
     <section id="services" className="section-container">
-      <div className="text-center max-w-3xl mx-auto mb-16">
+      <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16 lg:mb-20">
         <span className="section-tag">
           <FiCpu className="w-4 h-4" /> Capabilities & Services
         </span>
@@ -26,7 +28,7 @@ export default function Services() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <CardGrid cols={2}>
         {services.map((service, idx) => (
           <motion.div
             key={service.id}
@@ -34,31 +36,39 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="glass-card p-8 border border-slate-800 hover:border-indigo-500/40 text-left space-y-6"
+            className="h-full"
           >
-            <div className="flex items-center gap-4">
-              <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 shrink-0">
-                {iconMap[service.icon] || <FiServer className="w-6 h-6 text-indigo-400" />}
-              </div>
-              <h3 className="text-xl font-bold text-white">{service.title}</h3>
-            </div>
+            <Card>
+              <div className="flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 shrink-0">
+                      {iconMap[service.icon] || <FiServer className="w-6 h-6 text-indigo-400" />}
+                    </div>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
+                  </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              {service.description}
-            </p>
-
-            <div className="space-y-2 pt-2 border-t border-slate-800/80">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Included Capabilities</h4>
-              {service.features.map((feat, i) => (
-                <div key={i} className="flex items-center gap-2.5 text-xs text-slate-300">
-                  <FiCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>{feat}</span>
+                  <CardDescription className="mb-6 leading-relaxed">
+                    {service.description}
+                  </CardDescription>
                 </div>
-              ))}
-            </div>
+
+                <div className="mt-6 pt-5 border-t border-slate-800/80 space-y-2.5">
+                  <h4 className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider mb-3">
+                    Included Capabilities
+                  </h4>
+                  {service.features.map((feat, i) => (
+                    <div key={i} className="flex items-center gap-2.5 text-xs text-slate-300">
+                      <FiCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
           </motion.div>
         ))}
-      </div>
+      </CardGrid>
     </section>
   );
 }

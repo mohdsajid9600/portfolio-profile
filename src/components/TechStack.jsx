@@ -5,6 +5,8 @@ import { FaJava, FaServer, FaBrain, FaDatabase, FaReact, FaLock, FaGithub } from
 import { SiSpringboot, SiSpringsecurity, SiHibernate, SiSpring, SiMysql, SiJavascript, SiGithubcopilot, SiPostman, SiApachemaven, SiVercel, SiIntellijidea, SiApachetomcat } from 'react-icons/si';
 import { TbBrandOpenai } from 'react-icons/tb';
 import { techCategories } from '../data/portfolioData';
+import CardGrid from './common/CardGrid';
+import Card from './common/Card';
 
 export default function TechStack() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -50,7 +52,7 @@ export default function TechStack() {
       </div>
 
       {/* Category Filter Tabs */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-12 sm:mb-14">
+      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14 lg:mb-16">
         <button
           onClick={() => setActiveCategory('all')}
           className={`btn btn-sm ${activeCategory === 'all' ? 'btn-primary' : 'btn-secondary'}`}
@@ -69,15 +71,15 @@ export default function TechStack() {
       </div>
 
       {/* Display Categories */}
-      <div className="flex flex-col gap-12 sm:gap-14">
+      <div className="flex flex-col gap-14 lg:gap-16">
         {filteredCategories.map((category) => (
-          <div key={category.id} className="flex flex-col gap-5 text-left">
+          <div key={category.id} className="flex flex-col gap-6 text-left">
             <h3 className="text-lg sm:text-xl font-bold text-slate-200 flex items-center gap-3 border-b border-slate-800/80 pb-3">
               <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shrink-0" />
               <span>{category.name}</span>
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            <CardGrid cols={3}>
               {category.skills.map((skill, i) => (
                 <motion.div
                   key={i}
@@ -85,32 +87,36 @@ export default function TechStack() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.04 }}
-                  className="glass-card p-5 sm:p-6 flex items-start gap-4"
+                  className="h-full"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
-                    {iconMap[skill.icon] || <FiCode className="w-5 h-5 text-indigo-400" />}
-                  </div>
-                  <div className="flex-1 flex flex-col gap-2 min-w-0">
-                    <div className="flex justify-between items-center">
-                      <h4 className="text-sm font-bold text-white leading-snug truncate">{skill.name}</h4>
-                      <span className="text-xs font-mono font-bold text-indigo-400 shrink-0">{skill.level}%</span>
-                    </div>
-                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{skill.highlight}</p>
+                  <Card className="!p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-slate-950 border border-slate-800 shrink-0 flex items-center justify-center">
+                        {iconMap[skill.icon] || <FiCode className="w-5 h-5 text-indigo-400" />}
+                      </div>
+                      <div className="flex-1 flex flex-col gap-2 min-w-0">
+                        <div className="flex justify-between items-center">
+                          <h4 className="text-sm font-bold text-white leading-snug truncate">{skill.name}</h4>
+                          <span className="text-xs font-mono font-bold text-indigo-400 shrink-0">{skill.level}%</span>
+                        </div>
+                        <p className="text-xs text-slate-400 leading-relaxed line-clamp-2">{skill.highlight}</p>
 
-                    {/* Animated Skill Level Bar */}
-                    <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800 mt-1">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: 'easeOut' }}
-                        className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full"
-                      />
+                        {/* Animated Skill Level Bar */}
+                        <div className="w-full h-1.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800 mt-1">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${skill.level}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: 'easeOut' }}
+                            className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </Card>
                 </motion.div>
               ))}
-            </div>
+            </CardGrid>
           </div>
         ))}
       </div>

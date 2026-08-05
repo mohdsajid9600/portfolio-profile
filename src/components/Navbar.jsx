@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiCommand, FiMenu, FiX, FiFileText } from 'react-icons/fi';
+import {
+  FiCommand,
+  FiMenu,
+  FiX,
+  FiFileText,
+  FiUser,
+  FiCode,
+  FiBriefcase,
+  FiBookOpen,
+  FiFolder,
+  FiMail
+} from 'react-icons/fi';
 import ThemeToggle from './ThemeToggle';
 
 export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume }) {
@@ -9,12 +20,12 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
   const [activeSection, setActiveSection] = useState('hero');
 
   const navLinks = [
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Tech Stack', href: '#techstack', id: 'techstack' },
-    { name: 'Experience', href: '#experience', id: 'experience' },
-    { name: 'Education', href: '#education', id: 'education' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: 'About', href: '#about', id: 'about', icon: <FiUser className="w-4 h-4" /> },
+    { name: 'Tech Stack', href: '#techstack', id: 'techstack', icon: <FiCode className="w-4 h-4" /> },
+    { name: 'Experience', href: '#experience', id: 'experience', icon: <FiBriefcase className="w-4 h-4" /> },
+    { name: 'Education', href: '#education', id: 'education', icon: <FiBookOpen className="w-4 h-4" /> },
+    { name: 'Projects', href: '#projects', id: 'projects', icon: <FiFolder className="w-4 h-4" /> },
+    { name: 'Contact', href: '#contact', id: 'contact', icon: <FiMail className="w-4 h-4" /> },
   ];
 
   useEffect(() => {
@@ -49,7 +60,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
 
         {/* Column 1: Brand Logo (Left Aligned) */}
         <div className="flex-1 flex items-center justify-start">
-          <a href="#hero" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 rounded-xl p-1">
+          <a href="#hero" className="flex items-center gap-3 group focus:outline-none rounded-xl p-1">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
               <div className="w-full h-full bg-slate-950 rounded-[10.5px] flex items-center justify-center font-bold text-white text-base font-mono">
                 MS
@@ -66,20 +77,29 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
           </a>
         </div>
 
-        {/* Column 2: Desktop Navigation Pill (Centered) */}
-        <nav className="hidden lg:flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-full border border-slate-800/80 backdrop-blur-md shadow-inner">
+        {/* Column 2: Professional Desktop Navigation Pill (Centered with Generous Spacing) */}
+        <nav className="hidden lg:flex items-center gap-2 bg-slate-900/85 px-3 py-1.5 rounded-full border border-slate-800/90 backdrop-blur-xl shadow-xl shadow-slate-950/40 relative">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
               <a
                 key={link.name}
                 href={link.href}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 focus-visible:ring-2 focus-visible:ring-indigo-500 ${isActive
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-bold'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+                className={`relative px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none ${isActive
+                    ? 'text-white'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
                   }`}
               >
-                {link.name}
+                {isActive && (
+                  <motion.span
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-full shadow-md shadow-indigo-600/35 border border-indigo-400/30"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 flex items-center gap-1.5">
+                  {link.name}
+                </span>
               </a>
             );
           })}
@@ -90,7 +110,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
           {/* Command Palette Button */}
           <button
             onClick={onOpenCommand}
-            className="hidden sm:flex items-center gap-2 btn btn-sm btn-secondary font-mono text-xs h-9 px-3.5 rounded-xl"
+            className="hidden sm:flex items-center gap-2 btn btn-sm btn-secondary font-mono text-xs h-9 px-3.5 rounded-xl border border-slate-800 hover:border-indigo-500/40 transition-colors"
             title="Open Command Palette (Ctrl+K)"
             aria-label="Open Command Palette"
           >
@@ -105,7 +125,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
           {/* Resume CTA Button */}
           <button
             onClick={onOpenResume}
-            className="hidden sm:flex btn btn-sm btn-primary h-9 px-4 rounded-xl text-xs font-semibold"
+            className="hidden sm:flex btn btn-sm btn-primary h-9 px-4 rounded-xl text-xs font-semibold shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all"
             aria-label="Download Resume"
           >
             <FiFileText className="w-3.5 h-3.5" />
@@ -170,8 +190,8 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                 </div>
 
                 {/* Navigation Links */}
-                <div className="space-y-1.5">
-                  <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 block px-2 mb-1">
+                <div className="space-y-2">
+                  <span className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 block px-2 mb-2">
                     Menu Sections:
                   </span>
                   {navLinks.map((link) => {
@@ -181,12 +201,17 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                         key={link.name}
                         href={link.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${isActive
+                        className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 ${isActive
                             ? 'bg-indigo-600/90 text-white font-bold shadow-lg shadow-indigo-600/20 border border-indigo-500/40'
-                            : 'text-slate-300 hover:text-white hover:bg-slate-900/80'
+                            : 'text-slate-300 hover:text-white hover:bg-slate-900/80 border border-transparent'
                           }`}
                       >
-                        <span>{link.name}</span>
+                        <div className="flex items-center gap-3">
+                          <span className={isActive ? 'text-white' : 'text-indigo-400'}>
+                            {link.icon}
+                          </span>
+                          <span>{link.name}</span>
+                        </div>
                         {isActive && <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400" />}
                       </a>
                     );

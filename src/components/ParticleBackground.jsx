@@ -19,8 +19,7 @@ export default function ParticleBackground() {
 
     window.addEventListener('resize', handleResize);
 
-    // Particles setup
-    const particleCount = Math.min(Math.floor(window.innerWidth / 20), 65);
+    const particleCount = Math.min(Math.floor(window.innerWidth / 25), 55);
     const particles = [];
     const mouse = { x: null, y: null, radius: 140 };
 
@@ -44,7 +43,7 @@ export default function ParticleBackground() {
         this.size = Math.random() * 2 + 1;
         this.vx = (Math.random() - 0.5) * 0.6;
         this.vy = (Math.random() - 0.5) * 0.6;
-        this.baseAlpha = Math.random() * 0.4 + 0.15;
+        this.baseAlpha = Math.random() * 0.35 + 0.15;
       }
 
       update() {
@@ -54,7 +53,6 @@ export default function ParticleBackground() {
         if (this.x < 0 || this.x > width) this.vx *= -1;
         if (this.y < 0 || this.y > height) this.vy *= -1;
 
-        // Mouse attraction/repulsion interaction
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - this.x;
           const dy = mouse.y - this.y;
@@ -67,10 +65,12 @@ export default function ParticleBackground() {
         }
       }
 
-      draw() {
+      draw(isLight) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${this.baseAlpha})`;
+        ctx.fillStyle = isLight
+          ? `rgba(37, 99, 235, ${this.baseAlpha * 0.75})`
+          : `rgba(99, 102, 241, ${this.baseAlpha})`;
         ctx.fill();
       }
     }
@@ -81,6 +81,7 @@ export default function ParticleBackground() {
 
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
+      const isLight = document.documentElement.classList.contains('light');
 
       // Connect nearby particles
       for (let a = 0; a < particles.length; a++) {
@@ -90,11 +91,13 @@ export default function ParticleBackground() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < 110) {
-            const alpha = (1 - dist / 110) * 0.15;
+            const alpha = (1 - dist / 110) * 0.18;
             ctx.beginPath();
             ctx.moveTo(particles[a].x, particles[a].y);
             ctx.lineTo(particles[b].x, particles[b].y);
-            ctx.strokeStyle = `rgba(139, 92, 246, ${alpha})`;
+            ctx.strokeStyle = isLight
+              ? `rgba(37, 99, 235, ${alpha * 0.7})`
+              : `rgba(139, 92, 246, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -103,7 +106,7 @@ export default function ParticleBackground() {
 
       particles.forEach((particle) => {
         particle.update();
-        particle.draw();
+        particle.draw(isLight);
       });
 
       animationFrameId = requestAnimationFrame(animate);

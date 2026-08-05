@@ -309,15 +309,9 @@ a {
   overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .glass-card {
-    padding: 24px;
-  }
-}
-
 @media (max-width: 480px) {
   .glass-card {
-    padding: 20px;
+    padding: 24px;
   }
 }
 
@@ -531,64 +525,116 @@ html.light .bg-grid-pattern {
 }
 
 /* ==========================================================================
-   PRODUCTION-GRADE SAAS LIGHT THEME SYSTEM (Apple, Vercel, Linear, Stripe Inspired)
+   NEW ENTERPRISE LIGHT DESIGN SYSTEM FROM SCRATCH
+   Inspired by Stripe, Linear, Vercel, Apple, Notion, Anthropic, GitHub
    ========================================================================== */
 
 html.light {
-  --bg-primary: #f8fafc;
+  --bg-primary: #f5f7fb;
   --bg-secondary: #ffffff;
-  --bg-tertiary: #f1f5f9;
+  --bg-tertiary: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-hover: #ffffff;
-  --glass-border: rgba(203, 213, 225, 0.9);
-  --glass-border-hover: rgba(99, 102, 241, 0.6);
-
+  
   --text-primary: #0f172a;
-  --text-secondary: #334155;
+  --text-secondary: #475569;
   --text-muted: #64748b;
 
-  --gradient-text: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  --gradient-accent-text: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #059669 100%);
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.15);
+  --glass-border: #e2e8f0;
+  --glass-border-hover: #3b82f6;
+  --divider-color: #eef2f7;
+
+  --gradient-brand: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+  --gradient-text: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --gradient-accent-text: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+  
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.02), 0 10px 30px -4px rgba(15, 23, 42, 0.05);
+  --shadow-glow: 0 20px 40px -10px rgba(37, 99, 235, 0.14);
+
+  --accent-blue: #2563eb;
+  --accent-purple: #7c3aed;
+  --status-success: #16a34a;
+  --status-warning: #d97706;
+  --status-danger: #dc2626;
 }
 
 html.light body {
-  background-color: #f8fafc !important;
+  background-color: #f5f7fb !important;
   color: #0f172a !important;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Header & Navbar Light Mode */
+/* Section Spacing (96px) */
+html.light .section-container {
+  padding-top: 96px !important;
+  padding-bottom: 96px !important;
+}
+
+/* Unified Continuous Background in Light Mode (No harsh page-type block boxes) */
+html.light section {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+html.light footer {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+/* Premium Linear / Vercel Glass Navbar */
 html.light header {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  border-bottom-color: rgba(226, 232, 240, 0.9) !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
 }
 
 html.light nav {
-  background-color: rgba(241, 245, 249, 0.8) !important;
-  border-color: rgba(203, 213, 225, 0.8) !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
 }
 
-/* Background Grids & Radial Glows */
+html.light nav a {
+  color: #475569 !important;
+}
+
+html.light nav a:hover {
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Background Grids */
 html.light .bg-grid-pattern {
   background-image:
-    linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px) !important;
+    linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.03) 1px, transparent 1px) !important;
 }
 
-/* Typography Overrides for WCAG Compliance */
-html.light .text-white,
+/* Hero Background Glows */
+html.light .bg-indigo-600\/12,
+html.light .bg-purple-600\/10 {
+  background-color: rgba(37, 99, 235, 0.06) !important;
+}
+
+/* Section Tag Pill */
+html.light .section-tag {
+  background-color: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  color: #2563eb !important;
+  font-weight: 600 !important;
+}
+
+/* Typography Hierarchy in Light Mode */
 html.light h1,
 html.light h2,
 html.light h3,
 html.light h4,
 html.light h5,
-html.light h6 {
-  color: #0f172a !important;
-}
-
+html.light h6,
+html.light .text-white,
 html.light .text-slate-100 {
   color: #0f172a !important;
 }
@@ -598,24 +644,40 @@ html.light .text-slate-200 {
 }
 
 html.light .text-slate-300 {
-  color: #334155 !important;
+  color: #475569 !important;
+  line-height: 1.75 !important;
 }
 
 html.light .text-slate-400 {
-  color: #475569 !important;
-}
-
-html.light .text-slate-500 {
   color: #64748b !important;
 }
 
-/* Surface Backgrounds for Cards, Modals, Sections & Containers */
+html.light .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+/* Premium Dashboard Card System */
+html.light .glass-card,
+html.light .glass-panel {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 20px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 10px 30px -4px rgba(15, 23, 42, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+html.light .glass-card:hover {
+  background: #ffffff !important;
+  border-color: #3b82f6 !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.14), 0 0 20px rgba(59, 130, 246, 0.08) !important;
+}
+
+/* Sub-containers, Chips & Tables */
 html.light .bg-slate-950,
 html.light .bg-slate-950\/95,
 html.light .bg-slate-950\/90,
-html.light .bg-slate-950\/85,
 html.light .bg-slate-950\/80,
-html.light .bg-slate-950\/70,
 html.light .bg-slate-950\/60,
 html.light .bg-slate-950\/40,
 html.light .bg-slate-900,
@@ -623,24 +685,37 @@ html.light .bg-slate-900\/95,
 html.light .bg-slate-900\/90,
 html.light .bg-slate-900\/80,
 html.light .bg-slate-900\/60,
-html.light .bg-slate-900\/40,
-html.light .bg-slate-800,
-html.light .bg-slate-800\/90,
-html.light .bg-slate-800\/80,
-html.light .bg-slate-800\/60,
-html.light .bg-slate-800\/40 {
-  background-color: #ffffff !important;
+html.light .bg-slate-900\/40 {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
 }
 
-/* Inner Chips & Sub-Containers in Light Mode */
+html.light .bg-slate-950\/60,
 html.light .bg-slate-900\/90,
-html.light .bg-slate-900\/80,
-html.light .bg-slate-950\/70,
-html.light .bg-slate-950\/60 {
+html.light .bg-slate-900\/80 {
   background-color: #f1f5f9 !important;
 }
 
-/* Border System Overrides */
+/* Status Badges in Light Mode */
+html.light .bg-indigo-500\/10 {
+  background-color: #eff6ff !important;
+  color: #2563eb !important;
+  border-color: #bfdbfe !important;
+}
+
+html.light .bg-emerald-500\/10 {
+  background-color: #f0fdf4 !important;
+  color: #16a34a !important;
+  border-color: #bbf7d0 !important;
+}
+
+html.light .bg-amber-500\/10 {
+  background-color: #fffbeb !important;
+  color: #d97706 !important;
+  border-color: #fde68a !important;
+}
+
+/* Borders in Light Mode */
 html.light .border-slate-800,
 html.light .border-slate-800\/90,
 html.light .border-slate-800\/80,
@@ -649,47 +724,48 @@ html.light .border-slate-800\/30,
 html.light .border-slate-700,
 html.light .border-slate-700\/80,
 html.light .border-slate-700\/50 {
-  border-color: #cbd5e1 !important;
-}
-
-/* Glass Panels & Cards */
-html.light .glass-card,
-html.light .glass-panel {
-  background: #ffffff !important;
   border-color: #e2e8f0 !important;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08) !important;
 }
 
-html.light .glass-card:hover {
-  background: #ffffff !important;
-  border-color: #6366f1 !important;
-  box-shadow: 0 14px 40px -10px rgba(99, 102, 241, 0.15) !important;
+/* Buttons in Light Mode */
+html.light .btn-primary {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
 }
 
-/* Section Separator Lines */
-html.light .via-slate-800 {
-  --tw-gradient-via: #cbd5e1 !important;
+html.light .btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45) !important;
 }
 
-/* Secondary Buttons & Pills in Light Mode */
 html.light .btn-secondary {
-  background-color: #f1f5f9 !important;
-  border-color: #cbd5e1 !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
   color: #0f172a !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
 }
 
 html.light .btn-secondary:hover {
-  background-color: #e2e8f0 !important;
-  color: #4338ca !important;
-  border-color: #6366f1 !important;
+  background-color: #f8fafc !important;
+  color: #2563eb !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1.5px) !important;
 }
 
-/* Form Controls in Light Mode */
+/* Form Controls in Light Mode (SaaS Form Style) */
 html.light .form-input,
 html.light .form-textarea {
   background-color: #ffffff !important;
-  border-color: #cbd5e1 !important;
+  border: 1px solid #e2e8f0 !important;
   color: #0f172a !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
+  border-radius: 12px !important;
 }
 
 html.light .form-input::placeholder,
@@ -700,6 +776,17 @@ html.light .form-textarea::placeholder {
 html.light .form-input:focus,
 html.light .form-textarea:focus {
   background-color: #ffffff !important;
-  border-color: #6366f1 !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* Icon Blue Accents in Light Mode */
+html.light .text-indigo-400,
+html.light .text-indigo-500 {
+  color: #2563eb !important;
+}
+
+/* Timeline Connector */
+html.light .bg-gradient-to-b.from-indigo-500.via-purple-500.to-emerald-400 {
+  background: #e2e8f0 !important;
 }
