@@ -35,8 +35,8 @@ export default function ResumeModal({ isOpen, onClose }) {
     projects: [
       {
         title: "EasyTrip - Cab Booking Backend Application",
-        github: "https://github.com/mohdsajid9600",
-        liveDemo: "https://easytrip.vercel.app",
+        github: "https://github.com/mohdsajid9600/easytrip-api",
+        liveDemo: "https://easytrip-app.vercel.app/",
         stack: "Spring Boot | Spring Security | REST API | JPA/Hibernate | MySQL | Render + Vercel",
         bullets: [
           "End-to-end ownership: designed and deployed a full-featured cab booking REST API with complete CRUD operations, session-based authentication, and role-based authorization for Customer, Driver, and Admin roles.",
@@ -48,7 +48,7 @@ export default function ResumeModal({ isOpen, onClose }) {
       },
       {
         title: "Hospital Management System",
-        github: "https://github.com/mohdsajid9600",
+        github: "https://github.com/mohdsajid9600/Hospital-Management-System",
         stack: "Java Servlets | JDBC | MySQL | JSP | MVC | Apache Tomcat",
         bullets: [
           "Built a role-based web application with Patient, Doctor, and Admin modules for appointment scheduling, following the MVC pattern with a JSP + Bootstrap UI, deployed on Apache Tomcat."
@@ -56,7 +56,7 @@ export default function ResumeModal({ isOpen, onClose }) {
       },
       {
         title: "Product Management System - CRUD Web App",
-        github: "https://github.com/mohdsajid9600",
+        github: "https://github.com/mohdsajid9600/Product-Management-System",
         stack: "Spring MVC | Spring ORM | JPA | MySQL | JSP | JSTL",
         bullets: [
           "Developed a full CRUD product management application using Spring MVC, JPA, and MySQL with a JSTL-based JSP UI, demonstrating clean MVC architecture and ORM-based data persistence."
