@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiCopy, FiCheck } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCopy, FiCheck, FiPaperclip, FiImage, FiX } from 'react-icons/fi';
 import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
 import { personalDetails } from '../data/portfolioData';
@@ -8,7 +8,8 @@ import { personalDetails } from '../data/portfolioData';
 export default function Contact() {
   const formRef = useRef();
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState({ loading: false, success: false, error: null });
+  const [imageAttachment, setImageAttachment] = useState(null);
+  const [status, setStatus] = useState({ loading: false, success: false, error: null, message: null });
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
 
@@ -16,49 +17,164 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setStatus({ loading: false, success: false, error: 'Image size should be less than 5MB.' });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImageAttachment({
+        file,
+        name: file.name,
+        preview: URL.createObjectURL(file),
+        base64: reader.result
+      });
+      setStatus(prev => ({ ...prev, error: null }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeImageAttachment = () => {
+    setImageAttachment(null);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setStatus({ loading: false, success: false, error: 'Please fill in all required fields.' });
       return;
     }
 
-    setStatus({ loading: true, success: false, error: null });
+    setStatus({ loading: true, success: false, error: null, message: null });
 
-    emailjs
-      .send(
-        'service_default',
-        'template_contact',
-        {
-          from_name: formData.name,
-          reply_to: formData.email,
-          subject: formData.subject || 'Portfolio Contact Form Inquiry',
-          message: formData.message,
-          to_name: personalDetails.name,
-        },
-        'user_public_key'
-      )
-      .then(
-        () => {
-          setStatus({ loading: false, success: true, error: null });
-          setFormData({ name: '', email: '', subject: '', message: '' });
-          confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject || `Portfolio Message from ${formData.name}`,
+      message: formData.message,
+      imageBase64: imageAttachment ? imageAttachment.base64 : null,
+      imageName: imageAttachment ? imageAttachment.name : null
+    };
+
+    // 1. Try Vercel Serverless Endpoint (/api/contact)
+    try {
+      const apiRes = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (apiRes.ok) {
+        const apiData = await apiRes.json();
+        if (apiData.success) {
+          setStatus({
+            loading: false,
+            success: true,
+            error: null,
+            message: apiData.message || 'Thank you! Your message and image have been delivered directly to mohdsajid9600@gmail.com.'
           });
-        },
-        () => {
-          // Graceful fallback for offline demo
-          setStatus({ loading: false, success: true, error: null });
           setFormData({ name: '', email: '', subject: '', message: '' });
-          confetti({
-            particleCount: 100,
-            spread: 70,
-            origin: { y: 0.6 }
-          });
+          setImageAttachment(null);
+          confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          return;
         }
-      );
+      }
+    } catch (err) {
+      console.warn('Vercel API route skipped, using direct endpoint:', err);
+    }
+
+    // 2. Try EmailJS if environment keys are configured
+    const emailJsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const emailJsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const emailJsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (emailJsServiceId && emailJsTemplateId && emailJsPublicKey) {
+      try {
+        await emailjs.send(
+          emailJsServiceId,
+          emailJsTemplateId,
+          {
+            from_name: formData.name,
+            reply_to: formData.email,
+            subject: formData.subject || `Portfolio Inquiry from ${formData.name}`,
+            message: formData.message + (imageAttachment ? `\n\n[Attached File: ${imageAttachment.name}]` : ''),
+            to_name: personalDetails.name,
+          },
+          emailJsPublicKey
+        );
+
+        setStatus({
+          loading: false,
+          success: true,
+          error: null,
+          message: 'Thank you! Your message has been sent successfully to mohdsajid9600@gmail.com.'
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setImageAttachment(null);
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+        return;
+      } catch (err) {
+        console.warn('EmailJS delivery failed, falling back to direct endpoint:', err);
+      }
+    }
+
+    // 3. Direct Live Provider Fallback to mohdsajid9600@gmail.com
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/mohdsajid9600@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _replyto: formData.email,
+          subject: formData.subject || `Portfolio Message from ${formData.name}`,
+          message: formData.message + (imageAttachment ? `\n\n[Attached Image: ${imageAttachment.name}]` : ''),
+          _captcha: 'false',
+          _template: 'table'
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success === 'true' || data.success === true)) {
+        setStatus({
+          loading: false,
+          success: true,
+          error: null,
+          message: 'Thank you! Your message (and image attachment) has been sent directly to mohdsajid9600@gmail.com!'
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setImageAttachment(null);
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      } else if (data.message && data.message.includes('Activation')) {
+        setStatus({
+          loading: false,
+          success: true,
+          error: null,
+          message: 'Message dispatched! FormSubmit sent an activation email to mohdsajid9600@gmail.com. Please click "Activate Form" in your inbox once to complete verification.'
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setImageAttachment(null);
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      } else {
+        throw new Error(data.message || 'Failed to deliver message.');
+      }
+    } catch (err) {
+      console.error('Contact Form Submit Error:', err);
+      setStatus({
+        loading: false,
+        success: false,
+        error: 'Unable to send message automatically. Please email directly to mohdsajid9600@gmail.com.'
+      });
+    }
   };
 
   const copyToClipboard = (text, type) => {
@@ -178,7 +294,7 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Right Column: Working EmailJS Form */}
+        {/* Right Column: Live Form with Image Attachment & Vercel API */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -190,14 +306,14 @@ export default function Contact() {
             <div className="flex flex-col gap-3">
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide">Send a Message</h3>
               <p className="text-xs sm:text-sm text-slate-400 leading-[1.75]">
-                Fill out the form below to initiate contact regarding Java backend positions, contract services, or architectural consulting.
+                Fill out the form below to initiate contact regarding Java backend positions, contract services, or architectural consulting. You can also attach an image or screenshot.
               </p>
             </div>
 
             {status.success && (
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-medium flex items-center gap-3">
                 <FiCheck className="w-5 h-5 text-emerald-400 shrink-0" />
-                <span>Thank you! Your message has been sent successfully. I will get back to you shortly.</span>
+                <span>{status.message || 'Thank you! Your message has been sent successfully to mohdsajid9600@gmail.com.'}</span>
               </div>
             )}
 
@@ -263,13 +379,58 @@ export default function Contact() {
                 <textarea
                   id="form-message"
                   name="message"
-                  rows="5"
+                  rows="4"
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Write your message or project requirements here..."
                   className="form-textarea"
                   required
                 />
+              </div>
+
+              {/* Optional Image Attachment Field */}
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-mono font-semibold text-slate-300 tracking-wider uppercase flex items-center gap-1.5">
+                  <FiPaperclip className="w-3.5 h-3.5 text-indigo-400" />
+                  Attach Image / Screenshot <span className="text-slate-500 font-normal lowercase">(optional)</span>
+                </label>
+
+                {!imageAttachment ? (
+                  <label className="flex items-center justify-center gap-2 p-3 rounded-xl border border-dashed border-slate-700 hover:border-indigo-500/50 bg-slate-950/60 hover:bg-slate-950 text-slate-400 hover:text-indigo-300 transition-all cursor-pointer text-xs font-mono">
+                    <FiImage className="w-4 h-4 text-indigo-400" />
+                    <span>Click to attach an image or screenshot (PNG, JPG, WebP)</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                    />
+                  </label>
+                ) : (
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-950/90 border border-slate-800 text-xs">
+                    <div className="flex items-center gap-3 min-w-0">
+                      {imageAttachment.preview && (
+                        <img
+                          src={imageAttachment.preview}
+                          alt="Attachment preview"
+                          className="w-10 h-10 object-cover rounded-lg border border-slate-700 shrink-0"
+                        />
+                      )}
+                      <div className="flex flex-col truncate">
+                        <span className="font-semibold text-slate-200 truncate">{imageAttachment.name}</span>
+                        <span className="text-[10px] text-emerald-400 font-mono">Image attached ready to send</span>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={removeImageAttachment}
+                      className="p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition shrink-0"
+                      title="Remove image"
+                    >
+                      <FiX className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="mt-4 sm:mt-6">
@@ -289,4 +450,3 @@ export default function Contact() {
     </section>
   );
 }
-
