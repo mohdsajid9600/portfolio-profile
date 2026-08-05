@@ -564,12 +564,6 @@ html.light body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Section Spacing (96px) */
-html.light .section-container {
-  padding-top: 96px !important;
-  padding-bottom: 96px !important;
-}
-
 /* Layered Neutral Backgrounds across Sections */
 html.light #hero {
   background-color: #f5f7fb !important;
@@ -686,7 +680,6 @@ html.light .text-slate-200 {
 
 html.light .text-slate-300 {
   color: #475569 !important;
-  line-height: 1.75 !important;
 }
 
 html.light .text-slate-400 {
@@ -709,7 +702,7 @@ html.light .glass-panel {
 html.light .glass-card:hover {
   background: #ffffff !important;
   border-color: #cbd5e1 !important;
-  transform: translateY(-4px) !important;
+  transform: translateY(-3px) !important;
   box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.12) !important;
 }
 
@@ -753,12 +746,12 @@ html.light .btn-primary {
   background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%) !important;
   color: #ffffff !important;
   box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3) !important;
-  border: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
   border-radius: 12px !important;
 }
 
 html.light .btn-primary:hover {
-  transform: translateY(-2px) !important;
+  transform: translateY(-1px) !important;
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.4) !important;
 }
 
@@ -774,7 +767,7 @@ html.light .btn-secondary:hover {
   background-color: #f8fafc !important;
   color: #2563eb !important;
   border-color: #cbd5e1 !important;
-  transform: translateY(-1.5px) !important;
+  transform: translateY(-1px) !important;
 }
 
 /* Form Controls in Light Mode (SaaS Form Style) */
