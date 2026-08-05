@@ -70,24 +70,24 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
         className={`fixed top-0 left-0 right-0 z-[9000] transition-all duration-300 ${
           scrolled
             ? 'bg-slate-950/90 light:bg-white/90 backdrop-blur-xl border-b border-slate-800/80 light:border-slate-200 shadow-lg py-3'
-            : 'bg-slate-950/40 light:bg-white/50 backdrop-blur-md border-b border-slate-800/30 light:border-slate-200/50 py-4'
+            : 'bg-slate-950/40 light:bg-white/50 backdrop-blur-md border-b border-slate-800/30 light:border-slate-200/50 py-3.5 sm:py-4'
         }`}
       >
-        <div className="w-full px-4 sm:px-8 xl:px-12 flex items-center justify-between">
+        <div className="w-full px-3 sm:px-6 lg:px-10 flex items-center justify-between gap-2 max-w-7xl mx-auto">
 
-          {/* Column 1: Brand Logo (Left Aligned) */}
-          <div className="flex items-center justify-start shrink-0">
-            <a href="#hero" className="flex items-center gap-3 group focus:outline-none rounded-xl p-1">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
-                <div className="w-full h-full bg-slate-950 light:bg-white rounded-[10.5px] flex items-center justify-center font-bold text-white light:text-slate-900 text-base font-mono">
+          {/* Column 1: Brand Logo (Adaptive: MS icon on extra small mobile, Name on 380px+, Full Title on sm+) */}
+          <div className="flex items-center justify-start shrink-0 min-w-0">
+            <a href="#hero" className="flex items-center gap-2 sm:gap-3 group focus:outline-none rounded-xl p-0.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-emerald-500 p-[1.5px] shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300 shrink-0">
+                <div className="w-full h-full bg-slate-950 light:bg-white rounded-[10.5px] flex items-center justify-center font-bold text-white light:text-slate-900 text-sm sm:text-base font-mono">
                   MS
                 </div>
               </div>
-              <div className="flex flex-col text-left">
-                <span className="font-extrabold text-slate-100 light:text-slate-900 group-hover:text-indigo-400 transition-colors tracking-tight text-base leading-tight">
+              <div className="hidden min-[380px]:flex flex-col text-left min-w-0">
+                <span className="font-extrabold text-slate-100 light:text-slate-900 group-hover:text-indigo-400 transition-colors tracking-tight text-sm sm:text-base leading-tight truncate">
                   Mohd Sajid
                 </span>
-                <span className="text-[10px] text-slate-400 light:text-slate-500 font-mono tracking-wider uppercase whitespace-nowrap">
+                <span className="hidden sm:block text-[10px] text-slate-400 light:text-slate-500 font-mono tracking-wider uppercase whitespace-nowrap">
                   Java Backend & AI Architect
                 </span>
               </div>
@@ -95,14 +95,14 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
           </div>
 
           {/* Column 2: Professional Desktop Navigation Pill */}
-          <nav className="hidden xl:flex items-center gap-1.5 bg-slate-900/85 light:bg-slate-100 px-3 py-1.5 rounded-full border border-slate-800/90 light:border-slate-200 backdrop-blur-xl shadow-xl shadow-slate-950/40 relative shrink-0 whitespace-nowrap">
+          <nav className="hidden lg:flex items-center gap-1 bg-slate-900/85 light:bg-slate-100 px-2.5 py-1.5 rounded-full border border-slate-800/90 light:border-slate-200 backdrop-blur-xl shadow-xl shadow-slate-950/40 relative shrink-0 whitespace-nowrap">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`relative px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none whitespace-nowrap ${
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none whitespace-nowrap ${
                     isActive
                       ? 'text-white'
                       : 'text-slate-300 light:text-slate-600 hover:text-white light:hover:text-slate-900 hover:bg-slate-800/60 light:hover:bg-white'
@@ -123,12 +123,12 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
             })}
           </nav>
 
-          {/* Column 3: Action Controls (Right Aligned) */}
-          <div className="flex items-center justify-end gap-3 shrink-0">
+          {/* Column 3: Action Controls */}
+          <div className="flex items-center justify-end gap-2 sm:gap-3 shrink-0">
             {/* Command Palette Button */}
             <button
               onClick={onOpenCommand}
-              className="hidden sm:flex items-center gap-2 btn btn-sm btn-secondary font-mono text-xs h-9 px-3.5 rounded-xl border border-slate-800 light:border-slate-200 hover:border-indigo-500/40 transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-2 btn btn-sm btn-secondary font-mono text-xs h-9 px-3 rounded-xl border border-slate-800 light:border-slate-200 hover:border-indigo-500/40 transition-colors whitespace-nowrap"
               title="Open Command Palette (Ctrl+K)"
               aria-label="Open Command Palette"
             >
@@ -143,7 +143,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
             {/* Resume CTA Button */}
             <button
               onClick={onOpenResume}
-              className="hidden sm:flex btn btn-sm btn-primary h-9 px-4 rounded-xl text-xs font-semibold shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all whitespace-nowrap"
+              className="hidden md:flex btn btn-sm btn-primary h-9 px-3.5 rounded-xl text-xs font-semibold shadow-md shadow-indigo-600/20 hover:shadow-indigo-600/30 transition-all whitespace-nowrap"
               aria-label="Download Resume"
             >
               <FiFileText className="w-3.5 h-3.5" />
@@ -153,7 +153,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden btn btn-icon btn-secondary w-9 h-9 rounded-xl flex items-center justify-center border border-slate-800 light:border-slate-200 text-slate-200 light:text-slate-800"
+              className="lg:hidden btn btn-icon btn-secondary w-9 h-9 rounded-xl flex items-center justify-center border border-slate-800 light:border-slate-200 text-slate-200 light:text-slate-800 shrink-0"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <FiX className="w-5 h-5" /> : <FiMenu className="w-5 h-5" />}
@@ -167,7 +167,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
         <AnimatePresence>
           {mobileMenuOpen && (
             <>
-              {/* 4. Dark Backdrop: rgba(0,0,0,0.45) & backdrop-filter blur(6px) */}
+              {/* Dark Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -187,7 +187,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                 }}
               />
 
-              {/* 1, 2, 3, 6, 8, 9. Production-Grade Right Slide Mobile Navigation Drawer */}
+              {/* Right Slide Mobile Navigation Drawer */}
               <motion.div
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
@@ -204,7 +204,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                 }}
                 className="bg-slate-950 light:bg-white text-slate-100 light:text-slate-900 border-l border-slate-800 light:border-slate-200 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto box-border text-left"
               >
-                {/* 8. Vertically Aligned Header & Navigation Links */}
+                {/* Vertically Aligned Header & Navigation Links */}
                 <div className="space-y-6">
                   {/* Top Bar: Brand Logo + Close Button */}
                   <div className="flex items-center justify-between border-b border-slate-800 light:border-slate-200 pb-5">
@@ -269,7 +269,7 @@ export default function Navbar({ theme, toggleTheme, onOpenCommand, onOpenResume
                   </div>
                 </div>
 
-                {/* 8. Vertically Aligned Controls & Actions */}
+                {/* Vertically Aligned Controls & Actions */}
                 <div className="space-y-4 pt-6 border-t border-slate-800 light:border-slate-200 mt-6">
                   {/* Theme Toggle Bar inside Drawer */}
                   <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 light:bg-slate-100 border border-slate-800 light:border-slate-200">
